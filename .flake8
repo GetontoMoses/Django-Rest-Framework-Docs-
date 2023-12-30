@@ -1,6 +1,6 @@
 [flake8]
 exclude =
-    .venv,
+    venv,
     .tox,
     manage.py,
     migrations,
