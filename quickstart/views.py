@@ -3,8 +3,6 @@ from quickstart.serializers import SnippetSerializer
 from rest_framework import generics
 from quickstart.serializers import UserSerializer
 from django.contrib.auth.models import User
-from rest_framework import permissions
-from quickstart.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -38,13 +36,8 @@ class UserDetail(generics.RetrieveAPIView):
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = [permissions.AllowAny]    
-    
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = [permissions.AllowAny]
+    
